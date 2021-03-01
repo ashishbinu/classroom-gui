@@ -45,3 +45,6 @@ json/
 
 #ctags
 tags
+
+#fvm
+.fvm
