@@ -1,10 +1,9 @@
-import 'package:classroom_gui/controllers/subject_order_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../controllers/subject_order_controller.dart';
+import '../controllers/subject_page_controller.dart';
 import '../models/study_material.dart';
 import '../models/subject.dart';
 
@@ -49,7 +48,6 @@ class StudyMaterialSearch extends SearchDelegate<StudyMaterial> {
             ? Scrollbar(
                 isAlwaysShown: true,
                 child: ListView.builder(
-                  itemCount: results.length,
                   padding: const EdgeInsets.all(20.0),
                   itemBuilder: (_, index) {
                     final material = results[index];
@@ -118,7 +116,8 @@ class SubjectPage extends StatelessWidget {
   const SubjectPage(this.subject);
   @override
   Widget build(BuildContext context) {
-    final SubjectOrderController controller = Get.put(SubjectOrderController());
+    final SubjectPageController controller = Get.put(SubjectPageController());
+    // final ScrollController scrollController = ScrollController();
     return Scaffold(
       appBar: AppBar(
         title: Text(subject.title),
@@ -146,8 +145,10 @@ class SubjectPage extends StatelessWidget {
                 .every((material) => material.topicGroup != null)
             ? Scrollbar(
                 isAlwaysShown: true,
+                controller: controller.scrollController,
                 child: GroupedListView(
                   elements: subject.materials,
+                  controller: controller.scrollController,
                   groupBy: (material) => material.topicGroup,
                   order: controller.isReverse.value
                       ? GroupedListOrder.ASC
@@ -177,7 +178,9 @@ class SubjectPage extends StatelessWidget {
               )
             : Scrollbar(
                 isAlwaysShown: true,
+                controller: controller.scrollController,
                 child: ListView.builder(
+                  controller: controller.scrollController,
                   itemCount: subject.materials.length,
                   padding: const EdgeInsets.all(20.0),
                   itemBuilder: (_, index) {
