@@ -7,8 +7,8 @@ import '../controllers/subject_page_controller.dart';
 import '../models/study_material.dart';
 import '../models/subject.dart';
 
-class StudyMaterialSearch extends SearchDelegate<StudyMaterial> {
-  final List<StudyMaterial> studyMaterialList;
+class StudyMaterialSearch extends SearchDelegate<StudyMaterial?> {
+  final List<StudyMaterial>? studyMaterialList;
 
   StudyMaterialSearch(this.studyMaterialList);
   @override
@@ -39,9 +39,9 @@ class StudyMaterialSearch extends SearchDelegate<StudyMaterial> {
     // final titleList = studyMaterialList.map((studyMaterial)=>studyMaterial.title).toList();
     // final fuse = Fuzzy(titleList);
     // final result = fuse.search(query);
-    final results = studyMaterialList
+    final results = studyMaterialList!
         .where((studyMaterial) =>
-            studyMaterial.title.isCaseInsensitiveContains(query))
+            studyMaterial.title!.isCaseInsensitiveContains(query))
         .toList();
     return query != ''
         ? results.isNotEmpty
@@ -49,6 +49,7 @@ class StudyMaterialSearch extends SearchDelegate<StudyMaterial> {
                 isAlwaysShown: true,
                 child: ListView.builder(
                   padding: const EdgeInsets.all(20.0),
+                  itemCount: results.length,
                   itemBuilder: (_, index) {
                     final material = results[index];
                     return CardTile(
@@ -87,9 +88,9 @@ class CardTile extends StatelessWidget {
   final VoidCallback onTap;
 
   const CardTile({
-    Key key,
-    @required this.material,
-    @required this.onTap,
+    Key? key,
+    required this.material,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -97,7 +98,7 @@ class CardTile extends StatelessWidget {
     return Card(
       child: ListTile(
         title: Text(
-          material.title,
+          material.title!,
           style: const TextStyle(
             fontSize: 16.0,
             color: Colors.black,
@@ -111,49 +112,49 @@ class CardTile extends StatelessWidget {
 }
 
 class SubjectPage extends StatelessWidget {
-  final Subject subject;
+  final Subject? subject;
 
   const SubjectPage(this.subject);
   @override
   Widget build(BuildContext context) {
-    final SubjectPageController controller = Get.put(SubjectPageController());
+    final SubjectPageController? controller = Get.put(SubjectPageController());
     // final ScrollController scrollController = ScrollController();
     return Scaffold(
       appBar: AppBar(
-        title: Text(subject.title),
+        title: Text(subject!.title!),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () {
               showSearch(
                 context: context,
-                delegate: StudyMaterialSearch(subject.materials),
+                delegate: StudyMaterialSearch(subject!.materials),
               );
             },
           ),
           IconButton(
             icon: const Icon(Icons.sort),
             onPressed: () {
-              controller.isReverse.toggle();
+              controller!.isReverse.toggle();
             },
           ),
         ],
       ),
       body: Obx(() {
-        final isReverse = controller.isReverse.value;
-        return subject.materials
+        final isReverse = controller!.isReverse.value;
+        return subject!.materials!
                 .every((material) => material.topicGroup != null)
             ? Scrollbar(
                 isAlwaysShown: true,
                 controller: controller.scrollController,
                 child: GroupedListView(
-                  elements: subject.materials,
+                  elements: subject!.materials!,
                   controller: controller.scrollController,
-                  groupBy: (material) => material.topicGroup,
-                  order: controller.isReverse.value
+                  groupBy: (dynamic material) => material.topicGroup,
+                  order: controller.isReverse.value!
                       ? GroupedListOrder.ASC
                       : GroupedListOrder.DESC,
-                  groupSeparatorBuilder: (groupValue) => Padding(
+                  groupSeparatorBuilder: (dynamic groupValue) => Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 24.0, vertical: 18.0),
                     child: Text(
@@ -165,7 +166,7 @@ class SubjectPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  itemBuilder: (_, material) => CardTile(
+                  itemBuilder: (_, dynamic material) => CardTile(
                     material: material as StudyMaterial,
                     onTap: () async {
                       // debugPrint("\n");
@@ -181,12 +182,12 @@ class SubjectPage extends StatelessWidget {
                 controller: controller.scrollController,
                 child: ListView.builder(
                   controller: controller.scrollController,
-                  itemCount: subject.materials.length,
+                  itemCount: subject!.materials!.length,
                   padding: const EdgeInsets.all(20.0),
                   itemBuilder: (_, index) {
-                    final length = subject.materials.length;
-                    final material = subject
-                        .materials[isReverse ? length - index - 1 : index];
+                    final length = subject!.materials!.length;
+                    final material = subject!
+                        .materials![isReverse! ? length - index - 1 : index];
                     return CardTile(
                       material: material,
                       onTap: () async {

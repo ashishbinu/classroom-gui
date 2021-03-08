@@ -7,16 +7,16 @@ import './setting_page.dart';
 import './subject_page.dart';
 
 class HomePage extends StatelessWidget {
-  final String title;
+  final String? title;
 
-  const HomePage({Key key, this.title}) : super(key: key);
+  const HomePage({Key? key, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final SubjectController controller = Get.put(SubjectController());
+    final SubjectController? controller = Get.put(SubjectController());
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(title!),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -32,9 +32,9 @@ class HomePage extends StatelessWidget {
           return Stack(
             children: [
               RefreshIndicator(
-                onRefresh: () => controller.fetchSubjects(onRefresh: true),
+                onRefresh: () => controller!.fetchSubjects(onRefresh: true),
                 child: ListView.builder(
-                    itemCount: controller.subjects.length,
+                    itemCount: controller!.subjects.length,
                     padding: const EdgeInsets.all(20.0),
                     itemBuilder: (_, index) {
                       return Card(
@@ -48,12 +48,12 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                           onTap: () => _onTapItem(
-                              context, controller.subjects[index] as Subject),
+                              context, controller.subjects[index] as Subject?),
                         ),
                       );
                     }),
               ),
-              if (controller.isLoading.value)
+              if (controller.isLoading.value!)
                 const Center(child: CircularProgressIndicator()),
             ],
           );
@@ -62,7 +62,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  void _onTapItem(BuildContext context, Subject subject) {
+  void _onTapItem(BuildContext context, Subject? subject) {
     debugPrint("____ON TO SECOND SCREEN __________");
     Get.to(SubjectPage(subject));
   }

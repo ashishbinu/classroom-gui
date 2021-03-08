@@ -16,7 +16,7 @@ class SubjectController extends GetxController {
     try {
       if (!onRefresh) isLoading(true);
       final classroom = await RemoteServices.fetchSubjects();
-      subjects.assignAll(classroom.subjects);
+      subjects.assignAll(classroom.subjects!);
     } finally {
       isLoading(false);
     }

@@ -7,7 +7,7 @@ class ClassRoom {
     this.subjects,
   });
 
-  final List<Subject> subjects;
+  final List<Subject>? subjects;
 
   factory ClassRoom.fromRawJson(String str) =>
       ClassRoom.fromJson(json.decode(str) as Map<String, dynamic>);
@@ -21,6 +21,6 @@ class ClassRoom {
       );
 
   Map<String, dynamic> toJson() => {
-        "subjects": List<dynamic>.from(subjects.map((x) => x.toJson())),
+        "subjects": List<dynamic>.from(subjects!.map((x) => x.toJson())),
       };
 }

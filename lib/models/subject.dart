@@ -10,9 +10,9 @@ class Subject {
     this.materials,
   });
 
-  final String id;
-  final String title;
-  final List<StudyMaterial> materials;
+  final String? id;
+  final String? title;
+  final List<StudyMaterial>? materials;
   // final List<StudyMaterial> youtube;
 
   factory Subject.fromRawJson(String str) =>
@@ -21,8 +21,8 @@ class Subject {
   String toRawJson() => json.encode(toJson());
 
   factory Subject.fromJson(Map<String, dynamic> json) => Subject(
-        id: json["id"] as String,
-        title: json["title"] as String,
+        id: json["id"] as String?,
+        title: json["title"] as String?,
         materials: List<StudyMaterial>.from(json["materials"]
                 .map((x) => StudyMaterial.fromJson(x as Map<String, dynamic>))
             as Iterable<dynamic>),
@@ -34,7 +34,7 @@ class Subject {
   Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
-        "materials": List<dynamic>.from(materials.map((x) => x.toJson())),
+        "materials": List<dynamic>.from(materials!.map((x) => x.toJson())),
         // "youutube": List<dynamic>.from(youtube.map((x) => x.toJson())),
       };
 }

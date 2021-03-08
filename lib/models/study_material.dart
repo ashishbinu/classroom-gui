@@ -7,9 +7,9 @@ class StudyMaterial {
     this.topicGroup,
   });
 
-  final String title;
-  final String url;
-  final String topicGroup;
+  final String? title;
+  final String? url;
+  final String? topicGroup;
 
   factory StudyMaterial.fromRawJson(String str) =>
       StudyMaterial.fromJson(json.decode(str) as Map<String, dynamic>);
@@ -17,9 +17,9 @@ class StudyMaterial {
   String toRawJson() => json.encode(toJson());
 
   factory StudyMaterial.fromJson(Map<String, dynamic> json) => StudyMaterial(
-        title: json["title"] as String,
-        url: json["url"] as String,
-        topicGroup: json["topic_group"] as String,
+        title: json["title"] as String?,
+        url: json["url"] as String?,
+        topicGroup: json["topic_group"] as String?,
       );
 
   Map<String, dynamic> toJson() => {
