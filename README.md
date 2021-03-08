@@ -4,39 +4,49 @@ A GUI in flutter for navigating through google classroom study materials.
 
 ## Requirements
 
-1. Install Flutter version >=2.0.0
+1. Install [Flutter](https://flutter.dev/docs/get-started/install) version >=2.0.0
 
-2. Enable web support
+2. Optional requirements :
 
-```bash
-flutter config --enable-web
-```
+   - Enable web support
 
-2. Enable desktop support for windows, macos and linux. Replace <desktop> with the platform you want to support (`windows`,`macos`,`linux`).
+     ```bash
+     flutter config --enable-web
+     ```
 
-```bash
-flutter config --enable-<desktop>-desktop
-```
+   - Enable desktop support for windows, macos and linux. Replace `<platform>` with the platform you want to support (`windows`,`macos`,`linux`).
+
+     ```bash
+     flutter config --enable-<platform>-desktop
+     ```
 
 ## Getting Started
 
-1. Download the source code
+1. Download the source code.
 
-```bash
-    git clone https://github.com/ashishbinu/classroom-gui.git
-    cd classroom-gui
-```
+   ```bash
+   git clone https://github.com/ashishbinu/classroom-gui.git
+   cd classroom-gui
+   ```
 
-2. Build for Android , Web and Desktop where <desktop> is (`windows`,`macos`,`linux`)
+2. Build for various platforms :
 
-```bash
-flutter build apk --split-per-abi
-```
+   - **Android**
 
-```bash
-flutter build web
-```
+     ```bash
+     flutter build apk --split-per-abi
+     ```
 
-```bash
-flutter build <desktop>
-```
+   - **Web**
+
+     ```bash
+     flutter build web
+     ```
+
+   - **Desktop**
+
+     Replace `<platform>` with the platform of choice (`windows`, `macos`, `linux`)
+
+     ```bash
+     flutter build <platform>
+     ```
