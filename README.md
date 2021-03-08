@@ -8,17 +8,17 @@ A GUI in flutter for navigating through google classroom study materials.
 
 2. Optional requirements :
 
-   - Enable web support
+- Enable web support
 
-     ```bash
-     flutter config --enable-web
-     ```
+  ```bash
+  flutter config --enable-web
+  ```
 
-   - Enable desktop support for windows, macos and linux. Replace `<platform>` with the platform you want to support (`windows`,`macos`,`linux`).
+- Enable desktop support for windows, macos and linux. Replace `<platform>` with the platform you want to support (`windows`,`macos`,`linux`).
 
-     ```bash
-     flutter config --enable-<platform>-desktop
-     ```
+  ```bash
+  flutter config --enable-<platform>-desktop
+  ```
 
 ## Getting Started
 
@@ -31,22 +31,32 @@ A GUI in flutter for navigating through google classroom study materials.
 
 2. Build for various platforms :
 
-   - **Android**
+- **Android**
 
-     ```bash
-     flutter build apk --split-per-abi
-     ```
+  ```bash
+  flutter build apk --split-per-abi
+  ```
 
-   - **Web**
+- **Web**
 
-     ```bash
-     flutter build web
-     ```
+  ```bash
+  flutter build web
+  ```
 
-   - **Desktop**
+- **Desktop**
 
-     Replace `<platform>` with the platform of choice (`windows`, `macos`, `linux`)
+  Replace `<platform>` with the platform of choice (`windows`, `macos`, `linux`)
 
-     ```bash
-     flutter build <platform>
-     ```
+  ```bash
+  flutter build <platform>
+  ```
+
+### Contributions
+
+This project uses json api provided by [better-classroom](https://github.com/AJAYK-01/better-classroom).
+<br/>
+Thanks [@AJAK-01](https://github.com/AJAYK-01/) for his contribution ❤️.
+
+### Feature Request / Bug Report
+
+If there is any **bug** or need a new **feature**, just open up an [issue](https://github.com/ashishbinu/classroom-gui/issues/new).
