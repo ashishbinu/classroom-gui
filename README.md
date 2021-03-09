@@ -29,7 +29,13 @@ A GUI in flutter for navigating through google classroom study materials.
    cd classroom-gui
    ```
 
-2. Build for various platforms :
+2. Initiliaze the Project.
+
+   ```bash
+   flutter create .
+   ```
+
+3. Build for various platforms :
 
 - **Android**
 
